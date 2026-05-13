@@ -1,11 +1,6 @@
 name: Build spine-godot (All Godot 4.x versions)
 
 on:
-  push:
-    paths:
-      - ".github/workflows/spine-godot.yml"
-      - 'spine-godot/**'
-      - 'spine-cpp/**'
   workflow_dispatch:
 
 jobs:
@@ -14,12 +9,11 @@ jobs:
       matrix:
         version:
           [
-            {"tag": "4.6.1-stable", "version": "4.6.1.stable", "mono": false},
-            {"tag": "4.6.1-stable", "version": "4.6.1.stable", "mono": true},
+            {"tag": "4.5.1-stable", "version": "4.5.1.stable", "dev": false},
           ]
     uses: ./.github/workflows/spine-godot-v4.yml
     with:
       godot_tag: ${{ matrix.version.tag }}
       godot_version: ${{ matrix.version.version }}
-      godot_mono: ${{ matrix.version.mono }}
+      dev: ${{ matrix.version.dev }}
     secrets: inherit
